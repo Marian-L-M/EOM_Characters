@@ -55,7 +55,7 @@ expo install firebase
 
 Configure Firebase features to be used in application.
 
-### 3.2 Test App locally
+### 3.3 Test App locally
 
 ```
 firebase emulators:start
@@ -63,6 +63,16 @@ firebase emulators:start
 ```
 
 Will run on localhost:5000
+
+### 4.0 Get React Navigation working
+
+Install the following packakges
+
+```
+npm i react-native-screens
+npm i @react-native-community/masked-view
+npm i react-native-gesture-handler
+```
 
 ## Shoutout
 
