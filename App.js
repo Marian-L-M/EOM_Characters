@@ -4,6 +4,12 @@ import React, { Component } from 'react';
 import { View, Text} from 'react-native'
 import * as firebase from 'firebase'
 
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware} from 'redux'
+import rootReducer from './redux/reducers'
+import thunk from 'redux-thunk'
+const store = createStore(rootReducer, applyMiddleware(thunk))
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // Deviation from Tutorial: LoginScreen was not mentioned but needed to be added to work.
 const firebaseConfig = {
@@ -26,6 +32,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LandingScreen from './components/auth/Landing';
 import RegisterScreen from './components/auth/Register';
 import LoginScreen from './components/auth/Login';
+import MainScreen from './components/Main';
 
 const Stack = createStackNavigator();
 
@@ -69,16 +76,16 @@ export class App extends Component {
         <Stack.Navigator initialRouteName="Landing">
           <Stack.Screen name="Landing" component={LandingScreen} options={{ headerShown: false}}/>
           <Stack.Screen name="Register" component={RegisterScreen}/>
-          <Stack.Screen name="Login" component={LoginScreen}/> 
+          <Stack.Screen name="Login" component={LoginScreen}/>
         </Stack.Navigator>
       </NavigationContainer>    
       );
     }
 
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <Text>User is logged in</Text>
-      </View>
+      <Provider store={store}>
+        <MainScreen />
+      </Provider>
     )
   }
 }
